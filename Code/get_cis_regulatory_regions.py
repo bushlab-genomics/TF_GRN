@@ -33,8 +33,8 @@ def get_cis_region_ctcf(x):
     if strnd == -1:
         up_reg = gn_df2.transcription_start_site.values[0] + args.window
         end_reg = gn_df2.start_position.values[0] - args.window
-        u_l = (gn_df2.chromosome_name.values[0],gn_df2.transcription_start_site.values[0],  up_reg)
-        d_l = (gn_df2.chromosome_name.values[0],end_reg,gn_df2.start_position.values[0])
+        u_l = [gn_df2.chromosome_name.values[0],gn_df2.transcription_start_site.values[0],  up_reg]
+        d_l = [gn_df2.chromosome_name.values[0],end_reg,gn_df2.start_position.values[0]]
         u_name = x + "_up.bed"
         d_name = x +"_down.bed"
         udf = pd.DataFrame(u_l).T
@@ -74,8 +74,8 @@ def get_cis_region_ctcf(x):
     else:
         up_reg = gn_df2.transcription_start_site.values[0] - args.window
         end_reg = gn_df2.end_position.values[0] + args.window
-        u_l = (gn_df2.chromosome_name.values[0],up_reg,gn_df2.transcription_start_site.values[0])
-        d_l = (gn_df2.chromosome_name.values[0],gn_df2.end_position.values[0],end_reg)
+        u_l = [gn_df2.chromosome_name.values[0],up_reg,gn_df2.transcription_start_site.values[0]]
+        d_l = [gn_df2.chromosome_name.values[0],gn_df2.end_position.values[0],end_reg]
         u_name = x + "_up.bed"
         d_name = x +"_down.bed"
         udf = pd.DataFrame(u_l).T
