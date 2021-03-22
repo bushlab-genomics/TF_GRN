@@ -1,4 +1,4 @@
-os.system("python run_tf_grn.py -i gene_list.txt toy_peaks.bed ctcf_peaks.bed toy_panda_ppi.csv toy_panda_expression.csv -t grn -w -m -n 20 -d -o toy_grn")
+python run_tf_grn.py -i gene_list.txt toy_peaks.bed ctcf_peaks.bed toy_panda_ppi.csv toy_panda_expression.csv -t grn -w -m -n 20 -d -o toy_grn
 python run_tf_grn.py -i gene_list.txt toy_peaks.bed ctcf_peaks.bed toy_panda_ppi.csv toy_panda_expression.csv -t promoter -w -m -n 20 -p -d -o toy_promoter"
  python run_tf_grn.py -i gene_list.txt toy_peaks.bed ctcf_peaks.bed toy_panda_ppi.csv toy_panda_expression.csv -t distal -w -m -n 20 -p -d -o toy
 python run_tf_grn.py -i gene_list.txt toy_peaks.bed ctcf_peaks.bed toy_panda_ppi.csv toy_panda_expression.csv -t intron -w -m -n 20 -d -o toy
