@@ -1,2 +1,0 @@
-toy_hic_results/toy_hic_reg_net.tsv
-toy_grn_results/toy_grn_reg_net.tsv
