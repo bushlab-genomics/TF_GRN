@@ -41,37 +41,44 @@ Following options are mainly required to run the script\
         
   ### Use-cases
   The following command will create a PANDA GRN with TFBS defined using a 50Kbp cis-regulatory window defined by CTCF peak boundaries using parallel processing and hamming distance threshold of 0.001. It will store the results in the "toy_grn" directory.\
-  **python run_tf_grn.py -i gene_list.txt toy_peaks.bed ctcf_peaks.bed toy_panda_ppi.csv toy_panda_expression.csv -t grn -w -m -n 20 -d -o toy_grn**
+  ```
+  python run_tf_grn.py -i gene_list.txt toy_peaks.bed ctcf_peaks.bed toy_panda_ppi.csv toy_panda_expression.csv -t grn -w -m -n 20 -d -o toy_grn
+  ```
   
   The following command will create a PANDA GRN with TFBS defined using a 50Kbp cis-regulatory window without the CTCF boundaries and the PPI data. It also won't use parallel processing.\
-  **python run_tf_grn.py -i gene_list.txt toy_peaks.bed none none toy_panda_expression.csv -t grn -w -d -o toy_grn**
-  
+  ```
+  python run_tf_grn.py -i gene_list.txt toy_peaks.bed none none toy_panda_expression.csv -t grn -w -d -o toy_grn
+  ```
   The following command will create a PANDA GRN using intronic TFBS.\
-  **python run_tf_grn.py -i gene_list.txt toy_peaks.bed ctcf_peaks.bed toy_panda_ppi.csv toy_panda_expression.csv -t intron -w -m -n 20 -d -o toy_intron**
-  
-  The following command will create a PANDA GRN using promoter and distal TFBS respectively based on promoter window of 5000bp:
-  **python run_tf_grn.py -i gene_list.txt toy_peaks.bed ctcf_peaks.bed toy_panda_ppi.csv toy_panda_expression.csv -t promoter -w -m -n 20 -p -d -o toy_promoter**\
-  **python run_tf_grn.py -i gene_list.txt toy_peaks.bed ctcf_peaks.bed toy_panda_ppi.csv toy_panda_expression.csv -t distal -w -m -n 20 -p -d -o toy_distal**
-  
+  ```
+  python run_tf_grn.py -i gene_list.txt toy_peaks.bed ctcf_peaks.bed toy_panda_ppi.csv toy_panda_expression.csv -t intron -w -m -n 20 -d -o toy_intron
+  ```
+  The following commands will create a PANDA GRN using promoter and distal TFBS respectively based on promoter window of 5000bp:
+  ```
+  python run_tf_grn.py -i gene_list.txt toy_peaks.bed ctcf_peaks.bed toy_panda_ppi.csv toy_panda_expression.csv -t promoter -w -m -n 20 -p -d -o toy_promoter
+  python run_tf_grn.py -i gene_list.txt toy_peaks.bed ctcf_peaks.bed toy_panda_ppi.csv toy_panda_expression.csv -t distal -w -m -n 20 -p -d -o toy_distal
+  ```
   The following command will create a Hi-C normalized PANDA GRN using a scaling factor of 1.0 as well as by upweighting the promoter TFBS:
-  **python run_tf_grn.py -i gene_list.txt toy_peaks.bed ctcf_peaks.bed toy_panda_ppi.csv toy_panda_expression.csv -t hic -c toy_hic_contacts.csv -u -w -m -n 20 -p -s -d -o toy_hic**
-  
+  ```
+ python run_tf_grn.py -i gene_list.txt toy_peaks.bed ctcf_peaks.bed toy_panda_ppi.csv toy_panda_expression.csv -t hic -c toy_hic_contacts.csv -u -w -m -n 20 -p -s -d -o toy_hic
+  ```
   The other script that is of use is "Code/get_pred_eval.py". The output of this script is a dataframe , produced in the "pred_results" directory, containing Pearson's Correlation Coefficient and MSE produced after running the ENET prediction models. This script has the following options:\n
+  ```
   * -i, --input: The name of the input file containing the matrices/GRNs to be used for features in order to build the ENET prediction models. 
   * -e, --expression: The name of the expression file containing the outcome FPKM values to be used for training the testing the ENET models. Place this file in the Data/ folder. 
   * -o, --output: The output prefix for the prediction results (PCC and MSE) that will be produced from the trained ENET models within the "pred_results" directoy. 
   * -r, --random: The number of random iterations for which to train and test the ENET models(default = 20). 
   * -m, --multiprocess: Select this flag if the users wants to run the script in a parallel manner. 
   * -n, --cpu: The number of cores/cpu to be specified along with the -m flag. 
-  
-  The following scripts set of scripts will build the prediction models using the normal and the Hi-C normalized GRNs for 20 iterations for a common set of genes.\
-  
-  **python run_tf_grn.py -i gene_list.txt toy_peaks.bed ctcf_peaks.bed toy_panda_ppi.csv toy_panda_expression.csv -t grn -w -m -n 20 -d -o toy_grn**\
-  **python run_tf_grn.py -i gene_list.txt toy_peaks.bed ctcf_peaks.bed toy_panda_ppi.csv toy_panda_expression.csv -t hic -c toy_hic_contacts.csv -u -w -m -n 20 -p -s -d -o toy_hic**\
-  **echo "toy_hic_results/toy_hic_reg_net.tsv" >> toy_inputs.txt**\
-  **echo "toy_grn_results/toy_grn_reg_net.tsv" >> toy_inputs.txt**\
-  **python Code/get_pred_eval.py -i toy_inputs.txt -e toy_pred_expression.csv -m -n 20 -r -o toy**
-  
+  ```
+  The following set of scripts will build the prediction models using the normal and the Hi-C normalized GRNs for 20 iterations for a common set of genes.\
+  ```
+  python run_tf_grn.py -i gene_list.txt toy_peaks.bed ctcf_peaks.bed toy_panda_ppi.csv toy_panda_expression.csv -t grn -w -m -n 20 -d -o toy_grn**\
+  python run_tf_grn.py -i gene_list.txt toy_peaks.bed ctcf_peaks.bed toy_panda_ppi.csv toy_panda_expression.csv -t hic -c toy_hic_contacts.csv -u -w -m -n 20 -p -s -d -o toy_hic\
+  echo "toy_hic_results/toy_hic_reg_net.tsv" >> toy_inputs.txt
+  echo "toy_grn_results/toy_grn_reg_net.tsv" >> toy_inputs.txt
+  python Code/get_pred_eval.py -i toy_inputs.txt -e toy_pred_expression.csv -m -n 20 -r -o toy
+  ```
   
   
   
